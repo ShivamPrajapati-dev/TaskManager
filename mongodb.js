@@ -54,18 +54,26 @@ MongoClient.connect(url,{useUnifiedTopology:true},(error,client)=>{
       // })
       //
       //
+      //
+      // db.collection('user').updateMany({
+      //   completed:false
+      // },{
+      //   $set:{
+      //     completed:true
+      //   }
+      // }).then((result)=>{
+      //   console.log(result);
+      // }).catch((err)=>{
+      //   console.log(err);
+      // });
 
-      db.collection('user').updateMany({
-        completed:false
-      },{
-        $set:{
-          completed:true
-        }
-      }).then((result)=>{
-        console.log(result);
+      db.collection('user').deleteMany({
+        completed:true
+      }).then((res)=>{
+        console.log(res);
       }).catch((err)=>{
         console.log(err);
-      });
+      })
 
 
 
