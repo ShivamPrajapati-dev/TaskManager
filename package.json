@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/ShivamPrajapati-dev/TaskManager#readme",
   "dependencies": {
-    "mongodb": "^3.4.1"
+    "mongodb": "^3.4.1",
+    "mongoose": "^5.8.3"
   }
 }
