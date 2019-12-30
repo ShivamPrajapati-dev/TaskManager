@@ -35,26 +35,37 @@ MongoClient.connect(url,{useUnifiedTopology:true},(error,client)=>{
       //     });
 
 
-      db.collection('user').findOne({_id:new ObjectId("5e09d4af4dc8943b45e44336")},(err,res)=>{
-        if(err){
-          return console.log("unable to fetch result");
-        }
+      // db.collection('user').findOne({_id:new ObjectId("5e09d4af4dc8943b45e44336")},(err,res)=>{
+      //   if(err){
+      //     return console.log("unable to fetch result");
+      //   }
+      //
+      //   console.log(res);
+      // });
+      //
+      // db.collection('user').find({completed:false}).toArray((err,doc)=>{
+      //
+      //   if(err){
+      //     return console.log(err);
+      //   }
+      //
+      //   console.log(doc);
+      //
+      // })
+      //
+      //
 
-        console.log(res);
+      db.collection('user').updateMany({
+        completed:false
+      },{
+        $set:{
+          completed:true
+        }
+      }).then((result)=>{
+        console.log(result);
+      }).catch((err)=>{
+        console.log(err);
       });
-
-      db.collection('user').find({completed:false}).toArray((err,doc)=>{
-
-        if(err){
-          return console.log(err);
-        }
-
-        console.log(doc);
-
-      })
-
-
-
 
 
 
