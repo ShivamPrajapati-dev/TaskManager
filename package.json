@@ -1,0 +1,22 @@
+{
+  "name": "taskmanager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShivamPrajapati-dev/TaskManager.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ShivamPrajapati-dev/TaskManager/issues"
+  },
+  "homepage": "https://github.com/ShivamPrajapati-dev/TaskManager#readme",
+  "dependencies": {
+    "mongodb": "^3.4.1"
+  }
+}
