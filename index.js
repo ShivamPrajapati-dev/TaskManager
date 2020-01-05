@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const User = require('./models/user');
+const User = require('./models/task');
 const port = process.env.PORT||5000;
 app.use(express.json());
 
