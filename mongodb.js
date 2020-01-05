@@ -1,3 +1,5 @@
+///home/shivam/mongoDb/bin/mongod --dbpath=/home/shivam/mongoDb-data
+
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 const ObjectId = mongodb.ObjectId;

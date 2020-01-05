@@ -19,10 +19,4 @@ const User = mongoose.model('user',{
   }
 });
 
-
-const shivam = new User({name:"shivam",password:"shivam",age:20});
-shivam.save().then(()=>{
-  console.log('saved');
-}).catch((err)=>{
-  console.log('error');
-})
+module.exports = User;
