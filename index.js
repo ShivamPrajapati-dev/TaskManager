@@ -5,76 +5,81 @@ const Task = require('./models/task');
 const port = process.env.PORT||5000;
 app.use(express.json());
 
-app.post('/user',(req,res)=>{
+app.post('/user',async (req,res)=>{
 
   const user = new User(req.body);
-  user.save().then(()=>{
-    res.status(201).send(user)
-  }).catch((err)=>{
-    res.status(400).send(err);
-  })
+
+  try {
+    await user.save();
+    res.send(user);
+  } catch (e) {
+    res.status(500).send()
+  }
 
 });
 
 
-app.get('/user',(req,res)=>{
+app.get('/user',async (req,res)=>{
 
-  User.find({}).then((user)=>{
-    res.status(201).send(user);
-  }).catch((err)=>{
-    res.status(500).send(err);
-  });
+  try{
+    const users = await User.find({});
+    res.send(users);
+  } catch(e){
+    res.status(500).send(e)
+  }
 
 });
 
-app.get('/user/:id',(req,res)=>{
+app.get('/user/:id',async (req,res)=>{
   const _id = req.params.id;
-  User.findById(_id).then((user)=>{
+
+  try{
+    const user = await User.findById(_id);
     if(!user){
-      return res.status(404).send();
+    return res.status(404).send();
     }
-    res.send(user)
-  }).catch((err)=>{
-    res.status(500).send(err);
-  })
-})
-
-app.get('/task',(req,res)=>{
-
-  Task.find({}).then((tasks)=>{
-    res.send(tasks);
-  }).catch((err)=>{
-    res.status(400).send(err);
-  });
+    res.send(user);
+  }catch(e){
+    res.status(500).send();
+  }
 
 });
 
-app.get('/task/:id',(req,res)=>{
+app.get('/task',async (req,res)=>{
+
+try {
+  const tasks = await Task.find({});
+  res.send(tasks);
+} catch (e) {
+  res.status(500).send()
+}
+
+});
+
+app.get('/task/:id',async (req,res)=>{
 
   const _id = req.params.id;
-  Task.findById(_id).then((task)=>{
-
+  try{
+    const task = await Task.findById(_id);
     if(!task){
       return res.status(404).send();
     }
-
     res.send(task);
-
-  }).catch((err)=>{
-    res.status(500).send(err);
-  })
+  }catch(e){
+    res.status(500).send()
+  }
 
 })
 
-app.post('/task',(req,res)=>{
+app.post('/task',async (req,res)=>{
 
   const task = new Task(req.body);
-  task.save().then(()=>{
-    res.status(201).send(task)
-  }).catch((err)=>{
-    res.status(400).send(err);
-  })
-
+  try {
+    await task.save();
+    res.send(task);
+  } catch (e) {
+    res.status(500).send();
+  }
 
 })
 
