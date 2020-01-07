@@ -89,7 +89,24 @@ app.get('/task/:id',async (req,res)=>{
     res.status(500).send()
   }
 
-})
+});
+
+app.patch('/task/:id', async (req,res)=>{
+  const validUpdates = ['name','description'];
+  const updates = Object.keys(req.body);
+  const isValidOperation = updates.every((update)=>{
+    return validUpdates.includes(update);
+  });
+  if(!isValidOperation){
+    return res.status(400).send();
+  }
+  try {
+    const task = await Task.findByIdAndUpdate(req.params.id,req.body,{new:true,runValidators:true});
+    res.send(task);
+  } catch (e) {
+    res.status(500).send();
+  }
+});
 
 app.post('/task',async (req,res)=>{
 
