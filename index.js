@@ -57,6 +57,9 @@ app.patch('/user/:id',async (req,res)=>{
 
   try {
       const user = await User.findByIdAndUpdate(req.params.id,req.body,{new:true,runValidators:true});
+      if(!user){
+        return res.status(404).send();
+      }
       res.send(user);
   } catch (e) {
     res.status(500).send(e);
@@ -102,6 +105,9 @@ app.patch('/task/:id', async (req,res)=>{
   }
   try {
     const task = await Task.findByIdAndUpdate(req.params.id,req.body,{new:true,runValidators:true});
+    if(!task){
+      return res.status(404).send();
+    }
     res.send(task);
   } catch (e) {
     res.status(500).send();
