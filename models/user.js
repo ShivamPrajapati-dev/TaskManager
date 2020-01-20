@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api',{newUrlParser:true});
 
@@ -19,8 +20,12 @@ const userSchema = mongoose.Schema({
   }
 })
 
-userSchema.pre('save', function(next){
-  console.log('just before saving');
+userSchema.pre('save', async function(next){
+const user = this;
+if(user.isModified('password')){
+  user.password = await bcrypt.hash(user.password,8);
+}
+
   next();
 })
 
