@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api',{newUrlParser:true});
 
-const User = mongoose.model('user',{
+const userSchema = mongoose.Schema({
   name:{
     type:String
   },password:{
@@ -17,6 +17,13 @@ const User = mongoose.model('user',{
   age:{
     type:Number
   }
-});
+})
+
+userSchema.pre('save', function(next){
+  console.log('just before saving');
+  next();
+})
+
+const User = mongoose.model('user',userSchema);
 
 module.exports = User;
