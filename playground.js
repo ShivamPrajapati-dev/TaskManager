@@ -44,4 +44,12 @@ const findHash =  async ()=>{
   const isMatch = await bcrypt.compare(password,hashedPassword);
   console.log(isMatch);
 }
-findHash();
+
+const jwt = require('jsonwebtoken');
+const fun = function(){
+  const token = jwt.sign({_id:'nik'},'nikshivam');
+  console.log(token);
+  const data = jwt.verify(token,'nikshivam');
+  console.log(data);
+}
+fun();
