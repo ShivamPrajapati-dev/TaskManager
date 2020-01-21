@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const validator = require('validator');
+const jwt = require('jsonwebtoken');
 
 mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api',{useUnifiedTopology:true});
 
@@ -33,7 +34,13 @@ const userSchema = mongoose.Schema({
   },
   age:{
     type:Number
-  }
+  },
+  token:[{
+    token:{
+      type:String,
+      required:true
+    }
+  }]
 });
 
 
@@ -44,7 +51,15 @@ if(user.isModified('password')){
 }
 
   next();
-})
+});
+
+userSchema.methods.generateAuthToken = async function(){
+  const user = this;
+  const token = jwt.sign({_id:user._id},'mynameisshivam');
+  user.token = user.token.concat({token});
+  await user.save();
+  return token;
+}
 
 
 
