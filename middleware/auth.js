@@ -9,10 +9,11 @@ const auth = async (req,res,next)=>{
     if(!user){
       throw new Error();
     }
-      res.send(user);
-    next();
+      //console.log(req);
+      req.user=user;
+      next();
   } catch (e) {
-    res.status(401).send('Invalid Authentication token');
+    res.status(401).send({error:'Invalid Authentication token'});
   }
 }
 
