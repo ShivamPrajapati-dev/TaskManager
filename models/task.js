@@ -2,12 +2,18 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api',{newUrlParser:true});
 
 const taskSchema = mongoose.Schema({
-  name:{
-    type:String,
-    trim:true
+  completed:{
+    type:Boolean,
+    default:false
   },
   description:{
-    type:String
+    type:String,
+    required:true,
+    trim:true
+  },
+  owner:{
+    type:mongoose.Schema.Types.ObjectId,
+    required:true
   }
 });
 
