@@ -16,6 +16,8 @@ const taskSchema = mongoose.Schema({
     required:true,
     ref:'user'
   }
+},{
+  timestamps:true
 });
 
 taskSchema.pre('save',function(next){

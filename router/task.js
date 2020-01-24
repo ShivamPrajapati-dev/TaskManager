@@ -7,8 +7,17 @@ const auth = require('../middleware/auth');
 router.get('/task',auth,async (req,res)=>{
 
 try {
-  const tasks = await Task.find({owner:req.user._id});
-  res.send(tasks);
+
+  if(req.query.completed==='true'||req.query.completed==='false'){
+    const tasks = await Task.find({completed:req.query.completed,owner:req.user._id});
+    res.send(tasks);
+
+  }else{
+    const tasks = await Task.find({owner:req.user._id});
+    res.send(tasks);
+
+  }
+
 } catch (e) {
   res.status(500).send()
 }
