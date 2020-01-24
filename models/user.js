@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
+const Task =require('./task');
 
 mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api',{useUnifiedTopology:true});
 
@@ -58,6 +59,12 @@ if(user.isModified('password')){
 
   next();
 });
+
+userSchema.pre('remove', async function(next){
+  const user = this;
+  await Task.deleteMany({owner:user._id});
+  next();
+})
 
 userSchema.methods.toJSON = function(){
   const user = this;
