@@ -120,6 +120,20 @@ router.delete('/user/me/avatar', auth, async(req,res)=>{
   req.user.avatar = undefined;
   await req.user.save();
   res.send();
+});
+
+router.get('/user/:id/avatar', async (req, res)=>{
+
+  try{
+    const user = await User.findById(req.params.id);
+    if(!user || !user.avatar){
+      throw new Error();
+    }
+    res.set('Content-type','image/jpg');
+    res.send(user.avatar);
+  } catch(e){
+    res.status(400).send();
+  }
 })
 
 module.exports = router;
