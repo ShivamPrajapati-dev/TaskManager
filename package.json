@@ -18,12 +18,14 @@
   },
   "homepage": "https://github.com/ShivamPrajapati-dev/TaskManager#readme",
   "dependencies": {
+    "@sendgrid/mail": "^6.5.1",
     "bcrypt": "^3.0.7",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.4.1",
     "mongoose": "^5.8.3",
     "multer": "^1.4.2",
+    "nodemailer": "^6.4.2",
     "sharp": "^0.24.0",
     "validator": "^12.1.0"
   },

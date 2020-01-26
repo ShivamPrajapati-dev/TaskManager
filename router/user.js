@@ -4,6 +4,7 @@ const User = require('../models/user');
 const sharp = require('sharp');
 const auth = require('../middleware/auth');
 const multer = require('multer');
+const {sendMail,sendExitMail} = require('../Email/email');
 const avatar = multer({
   limits:{
     fileSize:1000000
@@ -23,7 +24,8 @@ router.post('/user',async (req,res)=>{
   try {
 
     await user.save();
-        const token = await user.generateAuthToken();
+    sendMail(user.email,user.name);
+    const token = await user.generateAuthToken();
     res.send({user, token});
   } catch (e) {
     res.status(500).send(e)
@@ -102,6 +104,7 @@ router.delete('/user/me',auth, async (req,res)=>{
 
   try {
     await req.user.remove();
+    sendExitMail(req.user.email,req.user.name);
     res.send(req.user);
   } catch (e) {
     res.status(500).send();
