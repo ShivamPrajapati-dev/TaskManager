@@ -4,7 +4,7 @@ const validator = require('validator');
 const jwt = require('jsonwebtoken');
 const Task =require('./task');
 
-mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api',{useUnifiedTopology:true});
+mongoose.connect(process.env.MONGODB_URL,{useUnifiedTopology:true});
 
 const userSchema = mongoose.Schema({
   name:{
@@ -81,7 +81,7 @@ userSchema.methods.toJSON = function(){
 
 userSchema.methods.generateAuthToken = async function(){
   const user = this;
-  const token = jwt.sign({_id:user._id.toString()},'mynameisshivam');
+  const token = jwt.sign({_id:user._id.toString()},process.env.JWT_SECRET);
   user.token = user.token.concat({token});
   await user.save();
   return token;
