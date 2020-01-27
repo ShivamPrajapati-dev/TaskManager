@@ -4,7 +4,7 @@ const validator = require('validator');
 const jwt = require('jsonwebtoken');
 const Task =require('./task');
 
-mongoose.connect(process.env.MONGODB_URL,{useUnifiedTopology:true});
+//mongoose.connect(process.env.MONGODB_URL,{useUnifiedTopology:true});
 
 const userSchema = mongoose.Schema({
   name:{
