@@ -19,7 +19,7 @@
   "homepage": "https://github.com/ShivamPrajapati-dev/TaskManager#readme",
   "dependencies": {
     "@sendgrid/mail": "^6.5.1",
-    "bcrypt": "^3.0.7",
+    "bcrypt": "^5.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.4.1",
