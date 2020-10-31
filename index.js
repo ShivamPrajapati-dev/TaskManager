@@ -9,7 +9,6 @@ app.use(express.json());
 app.use(userRouter);
 app.use(taskRouter);
 
-
 app.listen(port,()=>{
-  console.log("listening on port "+port);
+  console.log("Listening on port "+port);
 })
